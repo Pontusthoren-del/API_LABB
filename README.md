@@ -3,16 +3,16 @@
 ## Endpoints
 
 ### Hämta alla personer
-GET /api/Persons
+GET /api/Users
 
 ### Hämta alla intressen för en person
-GET /api/Persons/{id}/interests
+GET /api/Users/{id}/interests
 
 ### Hämta alla länkar för en person
-GET /api/Persons/{id}/links
+GET /api/Users/{id}/links
 
 ### Koppla ett intresse till en person
-POST /api/Persons/{id}/interests
+POST /api/Users/{id}/interests
 
 Body:
 {
@@ -20,7 +20,7 @@ Body:
 }
 
 ### Lägga till en länk för en person och ett intresse
-POST /api/Persons/{id}/interests/{interestId}/links
+POST /api/Users/{id}/interests/{interestId}/links
 
 Body:
 {
