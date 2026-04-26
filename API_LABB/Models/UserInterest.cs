@@ -1,9 +1,9 @@
 ﻿namespace API_LABB.Models;
 
-public class PersonInterest
+public class UserInterest
 {
-    public int PersonId { get; set; }
-    public Person Person { get; set; } = null!;
+    public int UserId { get; set; }
+    public User User { get; set; } = null!;
 
     public int InterestId { get; set; }
     public Interest Interest { get; set; } = null!;

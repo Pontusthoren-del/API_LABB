@@ -6,9 +6,9 @@ public class Link
     public string Url { get; set; } = string.Empty;
     public string Label { get; set; } = string.Empty;
 
-    public int PersonId { get; set; }
-    public Person Person { get; set; } = null!;
+    public int UserId { get; set; }
+    public User User { get; set; } = null!;
 
     public int InterestId { get; set; }
-    public Interest PersonName { get; set; } = null!;
+    public Interest UserName { get; set; } = null!;
 }
