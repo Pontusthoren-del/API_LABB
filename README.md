@@ -38,11 +38,11 @@ Svar (200): Länk tillagd. Svar (404): Användaren eller intresset finns inte.
 Testanrop
 ----------------------------------------------
 Alla endpoints är testade via Swagger.
-GET /api/Users – Hämtade alla användare, fick tillbaka en lista med samtliga användare i databasen.
-GET /api/Users/1/interests – Hämtade intressen för användare med id 1, fick tillbaka användarens namn och en lista med intressen.
-GET /api/Users/1/links – Hämtade länkar för användare med id 1, fick tillbaka användarens namn och tillhörande länkar per intresse.
-POST /api/Users/1/Interests – Kopplade ett intresse till användare med id 1, testade även att skicka ett redan kopplat intresse och fick då 409 tillbaka.
-POST /api/Users/1/interests/3/links – Lade till en länk kopplad till ett specifikt intresse för användare med id 1.
+***GET /api/Users – Hämtade alla användare, fick tillbaka en lista med samtliga användare i databasen.***
+***GET /api/Users/1/interests – Hämtade intressen för användare med id 1, fick tillbaka användarens namn och en lista med intressen.***
+***GET /api/Users/1/links – Hämtade länkar för användare med id 1, fick tillbaka användarens namn och tillhörande länkar per intresse.***
+***POST /api/Users/1/Interests – Kopplade ett intresse till användare med id 1, testade även att skicka ett redan kopplat intresse och fick då 409 tillbaka.***
+***POST /api/Users/1/interests/3/links – Lade till en länk kopplad till ett specifikt intresse för användare med id 1.***
 
 Övrigt
 ----------------------------------------------
