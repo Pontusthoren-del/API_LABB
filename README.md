@@ -1,83 +1,32 @@
-# Avancerad .NET – Labb 3: API med Entity Framework
+Labb 3 – API med Entity Framework
+Ett REST API byggt med ASP.NET Core och EF Core. Hanterar användare, deras intressen och tillhörande länkar.
+Databasstruktur
+Fyra tabeller: User för grundinfo om användaren, Interest för intressen som Climbing eller Gaming, UserInterest som är kopplingstabellen mellan de två, och Link för länkar kopplade till en användare och ett intresse.
 
-Ett RESTful API byggt med ASP.NET Core och Entity Framework Core för att hantera användare, intressen och länkar.
-
-## Databasstruktur
-- **User** – Information om användaren
-- **Interest** – Olika intressen (t.ex. Climbing, Gaming)
-- **UserInterest** – Kopplingstabell mellan användare och intressen
-- **Link** – Webbadresser kopplade till en användare och ett intresse
-
----
-
-## Endpoints
-
-### Hämta alla användare
+Endpoints
 GET /api/Users
+Hämtar alla användare.
+Svar (200): [ { "firstName": "Erik", "lastName": "Larsson", "phoneNumber": "0701111111", "email": "erik@mail.com" } ]
 
-**Svar (200 OK):**
-```json
-[
-  { "firstName": "Erik", "lastName": "Larsson", "phoneNumber": "0701111111", "email": "erik@mail.com" }
-]
-```
-
----
-
-### Hämta alla intressen för en person
 GET /api/Users/{id}/interests
+Returnerar alla intressen för en specifik användare.
+Svar (200): { "firstName": "Erik", "lastName": "Larsson", "interests": [ "Climbing", "Gaming", "Running" ] }
+Svar (404): Användaren finns inte.
 
-**Svar (200 OK):**
-```json
-{
-  "firstName": "Erik",
-  "lastName": "Larsson",
-  "interests": [ "Climbing", "Gaming", "Running" ]
-}
-```
-- 404 – Användaren finns inte
-
----
-
-### Hämta alla länkar för en person
 GET /api/Users/{id}/links
+Hämtar alla länkar kopplade till en användare.
+Svar (200): { "firstName": "Erik", "lastName": "Larsson", "interestLinks": [ { "url": "https://climbing.com/", "title": "Climbing" }, { "url": "https://twitch.tv/", "title": "Gaming" } ] }
+Svar (404): Användaren finns inte.
 
-**Svar (200 OK):**
-```json
-{
-  "firstName": "Erik",
-  "lastName": "Larsson",
-  "interestLinks": [
-    { "url": "https://climbing.com/", "title": "Climbing" },
-    { "url": "https://twitch.tv/", "title": "Gaming" }
-  ]
-}
-```
-- 404 – Användaren finns inte
-
----
-
-### Koppla ett intresse till en person
 POST /api/Users/{userId}/Interests
+Kopplar ett intresse till en användare.
+Body: { "interestId": 3 }
+Svar (200): Intresse kopplat. Svar (404): Användaren eller intresset finns inte. Svar (409): Användaren har redan det intresset.
 
-Body: `{ "interestId": 3 }`
-
-- 200 – Intresse kopplat
-- 404 – Intresse eller användare finns inte
-- 409 – Användaren har redan det intresset (kan ej koppla ett intresse 2 gånger)
-
----
-
-### Lägga till en länk för en person och ett intresse
 POST /api/Users/{id}/interests/{interestId}/links
+Lägger till en länk kopplad till ett specifikt intresse.
+Body: { "url": "https://koket.se", "label": "Köket.se", "interestId": 3 }
+Svar (200): Länk tillagd. Svar (404): Användaren eller intresset finns inte.
 
-Body: `{ "url": "https://koket.se", "label": "Köket.se", "interestId": 3 }`
-
-- 200 – Länk tillagd
-- 404 – Användaren eller intresset finns inte
-
----
-
-## Testat med Swagger
-
-Alla endpoints är testade och fungerar!
+Övrigt
+Allt testat via Swagger och fungerar.
