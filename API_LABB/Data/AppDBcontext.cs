@@ -6,13 +6,15 @@ public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-    public DbSet<User> User { get; set; }
+    public DbSet<User> Users { get; set; }
     public DbSet<Interest> Interests { get; set; }
     public DbSet<UserInterest> UserInterests { get; set; }
     public DbSet<Link> Links { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<User>().ToTable("Users");
+
         modelBuilder.Entity<UserInterest>()
             .HasKey(pi => new { pi.UserId, pi.InterestId });
 
@@ -32,7 +34,7 @@ public class AppDbContext : DbContext
             .HasForeignKey(l => l.UserId);
 
         modelBuilder.Entity<Link>()
-            .HasOne(l => l.UserName)
+            .HasOne(l => l.Interest)
             .WithMany(i => i.Links)
             .HasForeignKey(l => l.InterestId);
 
@@ -128,7 +130,7 @@ public class AppDbContext : DbContext
             new Link { Id = 27, UserId = 9, InterestId = 7, Url = "https://adlibris.com", Label = "Adlibris" },
             new Link { Id = 28, UserId = 10, InterestId = 2, Url = "https://docs.microsoft.com", Label = "Microsoft Docs" },
             new Link { Id = 29, UserId = 10, InterestId = 8, Url = "https://ign.com", Label = "IGN" },
-            new Link { Id = 30, UserId = 10, InterestId = 12, Url = "https://letterboxd.com", Label = "Letterboxd" }  
+            new Link { Id = 30, UserId = 10, InterestId = 12, Url = "https://letterboxd.com", Label = "Letterboxd" }
         );
     }
 }

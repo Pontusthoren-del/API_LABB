@@ -20,7 +20,7 @@ namespace API_LABB.Controllers
 
         public async Task<ActionResult<IEnumerable<UserDto>>> GetAll()
         {
-            return Ok(await _ctx.User
+            return Ok(await _ctx.Users
                 .AsNoTracking()
                 .Select(p => new UserDto
                 (
@@ -34,7 +34,7 @@ namespace API_LABB.Controllers
         [HttpGet("{id}/interest")]
         public async Task<ActionResult<IEnumerable<InterestDto>>> GetInterestByPerson(int id)
         {
-            var user = await _ctx.User.AnyAsync(p => p.Id == id);
+            var user = await _ctx.Users.AnyAsync(p => p.Id == id);
 
             if (!user)
             {
@@ -58,7 +58,7 @@ namespace API_LABB.Controllers
 
         public async Task<ActionResult<IEnumerable<LinkDto>>> GetLinkByUser(int id)
         {
-            var user = await _ctx.User.AnyAsync(p => p.Id == id);
+            var user = await _ctx.Users.AnyAsync(p => p.Id == id);
 
             if (!user)
             {
@@ -74,7 +74,7 @@ namespace API_LABB.Controllers
                     l.Url,
                     l.Label,
                     l.InterestId,
-                    l.UserName.Title,
+                    l.Interest.Title,
                     l.User.Name
                 ))
                 .ToListAsync()
@@ -85,7 +85,7 @@ namespace API_LABB.Controllers
 
         public async Task<ActionResult> AddInterestToUser(int id, AddInterestToUserDto dto)
         {
-            var user = await _ctx.User.AnyAsync(p => p.Id == id);
+            var user = await _ctx.Users.AnyAsync(p => p.Id == id);
             if (!user)
             {
                 return NotFound("Person not found.");
@@ -114,7 +114,7 @@ namespace API_LABB.Controllers
 
         public async Task<ActionResult> AddLinkToUser(int id, int interestId, AddLinkDto dto)
         {
-            var user = await _ctx.User.AnyAsync(p => p.Id == id);
+            var user = await _ctx.Users.AnyAsync(p => p.Id == id);
             if (!user)
             {
                 return NotFound("Person not found");

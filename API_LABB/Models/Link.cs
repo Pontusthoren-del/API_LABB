@@ -10,5 +10,5 @@ public class Link
     public User User { get; set; } = null!;
 
     public int InterestId { get; set; }
-    public Interest UserName { get; set; } = null!;
+    public Interest Interest{ get; set; } = null!;
 }
