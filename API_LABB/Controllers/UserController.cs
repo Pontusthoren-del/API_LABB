@@ -18,6 +18,7 @@ namespace API_LABB.Controllers
 
         [HttpGet(Name = "GetAllPeople")]
 
+        // Hämtar alla users, .Select() mappar till UserDto, returnerar listan med Ok()
         public async Task<ActionResult<IEnumerable<UserDto>>> GetAll()
         {
             return Ok(await _ctx.Users
@@ -32,6 +33,7 @@ namespace API_LABB.Controllers
         }
 
         [HttpGet("{id}/interest")]
+        // Kollar om user finns med AnyAsync(), returnerar NotFound() annars. Filtrerar UserInterests på UserId, mappar till InterestDto
         public async Task<ActionResult<IEnumerable<InterestDto>>> GetInterestByPerson(int id)
         {
             var user = await _ctx.Users.AnyAsync(p => p.Id == id);
@@ -55,7 +57,7 @@ namespace API_LABB.Controllers
         }
 
         [HttpGet("{id}/links")]
-
+        // Kollar om user finns med AnyAsync(), returnerar NotFound() annars. Filtrerar Links på UserId, mappar till LinkDto
         public async Task<ActionResult<IEnumerable<LinkDto>>> GetLinkByUser(int id)
         {
             var user = await _ctx.Users.AnyAsync(p => p.Id == id);
@@ -82,7 +84,7 @@ namespace API_LABB.Controllers
         }
 
         [HttpPost("{id}/interests")]
-
+        // Kollar om user + interest finns, kollar duplikat med AnyAsync(). Skapar ny UserInterest och sparar med SaveChangesAsync()
         public async Task<ActionResult> AddInterestToUser(int id, AddInterestToUserDto dto)
         {
             var user = await _ctx.Users.AnyAsync(p => p.Id == id);
@@ -111,7 +113,7 @@ namespace API_LABB.Controllers
         }
 
         [HttpPost("{id}/interests/{interestId}/links")]
-
+        // Kollar om user finns + att kopplingen UserInterest existerar. Skapar ny Link med UserId/InterestId från dto, sparar med SaveChangesAsync()
         public async Task<ActionResult> AddLinkToUser(int id, int interestId, AddLinkDto dto)
         {
             var user = await _ctx.Users.AnyAsync(p => p.Id == id);
